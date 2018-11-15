@@ -60,21 +60,17 @@ def hrame():
     pole = len(slovo) * '-'
     pokus = -1 # pocita neuspesne pokusy, lokalna premenna
     while vyhodnot(pole, slovo, pokus) == 'dalej':
-        while True:
-            try:
-                pismeno = str(input('Zadaj pismenko: '))
-            except ValueError:
-                print('Nezadala si pismeno. Znovu.')    #neriesi, ked len odenterujem a nic nezadam, vtedy sa mi skrati pole a uz to nedava zmysel
-            else:
-                if pismeno in slovo:
-                    pole = pole[:slovo.index(pismeno)] + pismeno + pole[(slovo.index(pismeno) + 1):]
-                elif pismeno not in slovo:
-                    pokus = pokus + 1
-                    print(kresli(pokus))
-                print(pole)
-                break
+        try:
+            pismeno = str(input('Zadaj pismenko: '))
+        except ValueError:
+            print('Nezadala si pismeno. Znovu.')    #neriesi, ked len odenterujem a nic nezadam, vtedy sa mi skrati pole a uz to nedava zmysel
         else:
-            break
+            if pismeno in slovo:
+                pole = pole[:slovo.index(pismeno)] + pismeno + pole[(slovo.index(pismeno) + 1):]
+            elif pismeno not in slovo:
+                pokus = pokus + 1
+                print(kresli(pokus))
+        print(pole)
     if vyhodnot(pole, slovo, pokus) == 'vyhra':
         print('Mas cele slovo, vyhrala si:)')
     elif vyhodnot(pole, slovo, pokus) == 'prehra':
